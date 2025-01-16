@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo apt update > /dev/null 2>&1
-sudo apt install build-essential > /dev/null 2>&1
-sudo apt install unzip > /dev/null 2>&1
+sudo apt update
+sudo apt install build-essential
+sudo apt install unzip
 
 wget https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64
 sudo chmod +x bazelisk-linux-amd64
@@ -28,29 +28,26 @@ codeql resolve packs
 codeql database create codeqldb --language=python \
 --command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
 
-# #bazel build //...
-# #bazel test //...
+export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
+export RESULTS_FOLDER=$HOME/codeql-results
+sudo mkdir -p $RESULTS_FOLDER
 
-# export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
-# export RESULTS_FOLDER=$HOME/codeql-results
-# sudo mkdir -p $RESULTS_FOLDER
+# Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
+# Security extended suite: python-security-extended.qls
+# Security and quality suite: python-security-and-quality.qls
+codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
+--format=sarif-latest \
+--output=$RESULTS_FOLDER/python-code-scanning.sarif
 
-# # Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
-# # Security extended suite: python-security-extended.qls
-# # Security and quality suite: python-security-and-quality.qls
-# codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
-# --format=sarif-latest \
-# --output=$RESULTS_FOLDER/python-code-scanning.sarif
+cat $RESULTS_FOLDER/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $RESULTS_FOLDER/python-code-scanning-fixed-schema.sarif
 
-# cat $RESULTS_FOLDER/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $RESULTS_FOLDER/python-code-scanning-fixed-schema.sarif
+codeql github upload-results \
+--repository=$GITHUB_REPOSITORY \ 
+--ref=$GITHUB_REF \  
+--commit=$GITHUB_SHA \
+--sarif=/temp/example-repo-java.sarif \
+--github-auth-stdin'
 
-# codeql github upload-results \
-# --repository=$GITHUB_REPOSITORY \ 
-# --ref=$GITHUB_REF \  
-# --commit=$GITHUB_SHA \
-# --sarif=/temp/example-repo-java.sarif \
-# --github-auth-stdin'
-
-# bazel clean --expunge
-# bazel shutdown
+bazel clean --expunge
+bazel shutdown
 
