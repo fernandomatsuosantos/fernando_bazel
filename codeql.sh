@@ -18,8 +18,7 @@ sudo unzip codeql-linux64.zip -d $HOME/codeql-home
 export PATH=$PATH:$HOME/codeql-home/codeql
 
 # Download queries and add them to the CodeQL home folder
-cd $HOME/codeql-home
-sudo git clone --recursive https://github.com/github/codeql.git codeql-repo
+sudo git clone --recursive https://github.com/github/codeql.git $HOME/codeql-home/codeql-repo
 
 # Check the configuration
 codeql resolve languages
