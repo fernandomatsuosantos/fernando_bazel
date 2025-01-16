@@ -50,7 +50,7 @@ sudo $HOME/codeql-home/codeql/codeql github upload-results \
 --ref=$GITHUB_REF \
 --commit=$GITHUB_SHA \
 --sarif=result.sarif \
---github-auth-stdin ${{ secrets.GH_KEY }}
+--github-auth-stdin $1
 
 # bazel clean --expunge
 # bazel shutdown
