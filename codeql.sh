@@ -38,9 +38,6 @@ sudo $HOME/codeql-home/codeql/codeql database analyze codeqldb $CODEQL_SUITES_PA
 --format=sarif-latest \
 --output=$HOME/codeql-result/python-code-scanning.sarif
 
-sudo jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $HOME/codeql-result/python-code-scanning-fixed-schema.sarif
-cat $HOME/codeql-result/python-code-scanning.sarif
-
 sudo $HOME/codeql-home/codeql/codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \
 --ref=$GITHUB_REF \
