@@ -1,4 +1,4 @@
-name: "CodeQL Sample"
+name: "CodeQL CLI + Bazel Build"
 
 on:
   workflow_dispatch:
@@ -23,6 +23,7 @@ jobs:
 
       - name: Install and RUN CodeQL CLI & Bazel Build
         run: |
+          sudo chmod +x codeql.sh
           ./codeql.sh
 
       # - name: 'Upload findings to GitHub'
