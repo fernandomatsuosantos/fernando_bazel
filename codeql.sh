@@ -1,10 +1,5 @@
 #!/bin/bash
 
-
-echo $GITHUB_REPOSITORY
-echo $GITHUB_REF
-echo $GITHUB_SHA
-
 sudo apt update
 sudo apt install build-essential
 sudo apt install unzip
@@ -35,7 +30,7 @@ codeql database create codeqldb --language=python \
 
 export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
 sudo mkdir $HOME/codeql-result
-#sudo chmod -R 755 $HOME/codeql-result
+sudo chmod -R 755 $HOME/codeql-result
 
 # Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
 # Security extended suite: python-security-extended.qls
