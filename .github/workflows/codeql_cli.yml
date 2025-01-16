@@ -1,0 +1,31 @@
+name: "CodeQL Sample"
+
+on:
+  workflow_dispatch:
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+  run_script:
+    permissions:
+      # required for all workflows
+      actions: read
+      contents: read
+      security-events: write
+      statuses: write
+      packages: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install and RUN CodeQL CLI & Bazel Build
+        run: |
+          ./codeql.sh
+
+      # - name: 'Upload findings to GitHub'
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: 'findings.sarif'
