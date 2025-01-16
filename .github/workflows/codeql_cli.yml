@@ -28,7 +28,7 @@ jobs:
           sudo chmod +x codeql.sh
           ./codeql.sh ${{ secrets.GH_KEY }}
 
-      # - name: 'Upload findings to GitHub'
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with:
-      #     sarif_file: 'findings.sarif'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sarif
+          path: ./codeql-result/python-code-scanning.sarif
