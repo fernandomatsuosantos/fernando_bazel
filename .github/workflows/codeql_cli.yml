@@ -22,8 +22,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install and RUN CodeQL CLI & Bazel Build
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
         run: |
           sudo chmod +x codeql.sh
           ./codeql.sh ${{ secrets.GH_KEY }}
