@@ -25,8 +25,8 @@ sudo $HOME/codeql-home/codeql/codeql resolve languages
 sudo $HOME/codeql-home/codeql/codeql resolve packs
 
 # # Build and create CodeQL database
-# codeql database create codeqldb --language=python \
-# --command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
+sudo $HOME/codeql-home/codeql/codeql database create codeqldb --language=python \
+--command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
 
 # export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
 # sudo mkdir $HOME/codeql-result
