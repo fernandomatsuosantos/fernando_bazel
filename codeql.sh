@@ -15,14 +15,14 @@ sudo mkdir $HOME/codeql-home
 sudo unzip codeql-linux64.zip -d $HOME/codeql-home
 
 # Add the CodeQL home folder to the PATH
-export PATH=$PATH:$HOME/codeql-home/codeql
+# export PATH=$PATH:$HOME/codeql-home/codeql
 
 # Download queries and add them to the CodeQL home folder
 sudo git clone --recursive https://github.com/github/codeql.git $HOME/codeql-home/codeql-repo
 
 # Check the configuration
-sudo codeql resolve languages
-sudo codeql resolve packs
+sudo $HOME/codeql-home/codeql/codeql resolve languages
+sudo $HOME/codeql-home/codeql/codeql resolve packs
 
 # # Build and create CodeQL database
 # codeql database create codeqldb --language=python \
