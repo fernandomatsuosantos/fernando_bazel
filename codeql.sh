@@ -38,7 +38,7 @@ codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
 --format=sarif-latest \
 --output=$HOME/python-code-scanning.sarif
 
-cat $GITHUB_WORKSPACE/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $HOME/python-code-scanning-fixed-schema.sarif
+cat $HOME/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $HOME/python-code-scanning-fixed-schema.sarif
 
 codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \ 
