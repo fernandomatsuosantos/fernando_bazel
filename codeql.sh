@@ -23,11 +23,11 @@ sudo git clone --recursive https://github.com/github/codeql.git codeql-repo
 
 # Check the configuration
 codeql resolve languages
-codeql resolve qlpacks
+codeql resolve packs
 
-# # Build and create CodeQL database
-# codeql database create codeqldb --language=python \
-# --command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
+# Build and create CodeQL database
+codeql database create codeqldb --language=python \
+--command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
 
 # #bazel build //...
 # #bazel test //...
