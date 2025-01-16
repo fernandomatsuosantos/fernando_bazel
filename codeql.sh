@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo $HOME
 sudo apt update
 sudo apt install build-essential
 sudo apt install unzip
@@ -35,15 +36,15 @@ export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-sui
 # Security and quality suite: python-security-and-quality.qls
 codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
 --format=sarif-latest \
---output=python-code-scanning.sarif
+--output=$HOME/python-code-scanning.sarif
 
-cat python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > python-code-scanning-fixed-schema.sarif
+cat $GITHUB_WORKSPACE/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $HOME/python-code-scanning-fixed-schema.sarif
 
 codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \ 
 --ref=$GITHUB_REF \  
 --commit=$GITHUB_SHA \
---sarif=python-code-scanning.sarif \
+--sarif=$HOME/python-code-scanning.sarif \
 --github-auth-stdin'
 
 bazel clean --expunge
