@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install build-essential
-sudo apt install unzip
+sudo apt update > /dev/null 2>&1
+sudo apt install build-essential > /dev/null 2>&1
+sudo apt install unzip > /dev/null 2>&1
 
 wget https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64
 sudo chmod +x bazelisk-linux-amd64
@@ -33,7 +33,7 @@ codeql database create codeqldb --language=python \
 #bazel test //...
 
 export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
-export RESULTS_FOLDER=codeql-results
+export RESULTS_FOLDER=$HOME/codeql-results
 sudo mkdir -p $RESULTS_FOLDER
 
 # Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
