@@ -44,6 +44,8 @@ sudo $HOME/codeql-home/codeql/codeql github upload-results \
 --sarif=$HOME/codeql-result/python-code-scanning.sarif \
 --github-auth-stdin=$1
 
+cat $HOME/codeql-result/python-code-scanning.sarif
+
 bazel clean --expunge
 bazel shutdown
 
