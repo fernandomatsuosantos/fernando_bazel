@@ -29,23 +29,21 @@ codeql database create codeqldb --language=python \
 --command='bazel build --spawn_strategy=local --nouse_action_cache --noremote_accept_cached --noremote_upload_local_results'
 
 export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
-export RESULTS_FOLDER=$HOME/codeql-results
-sudo mkdir -p $RESULTS_FOLDER
 
 # Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
 # Security extended suite: python-security-extended.qls
 # Security and quality suite: python-security-and-quality.qls
 codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
 --format=sarif-latest \
---output=$RESULTS_FOLDER/python-code-scanning.sarif
+--output=python-code-scanning.sarif
 
-cat $RESULTS_FOLDER/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $RESULTS_FOLDER/python-code-scanning-fixed-schema.sarif
+cat python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $RESULTS_FOLDER/python-code-scanning-fixed-schema.sarif
 
 codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \ 
 --ref=$GITHUB_REF \  
 --commit=$GITHUB_SHA \
---sarif=/temp/example-repo-java.sarif \
+--sarif=python-code-scanning.sarif \
 --github-auth-stdin'
 
 bazel clean --expunge
