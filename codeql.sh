@@ -45,11 +45,11 @@ codeql database analyze codeqldb $CODEQL_SUITES_PATH/python-code-scanning.qls \
 
 cat $RESULTS_FOLDER/python-code-scanning.sarif | jq '.["$schema"] = "http://json.schemastore.org/sarif-2.1.0-rtm.1"' > $RESULTS_FOLDER/python-code-scanning-fixed-schema.sarif
 
-codeql github upload-results
+codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \ 
 --ref=$GITHUB_REF \  
 --commit=$GITHUB_SHA \
---sarif=/temp/example-repo-java.sarif 
+--sarif=/temp/example-repo-java.sarif \
 --github-auth-stdin'
 
 bazel clean --expunge
