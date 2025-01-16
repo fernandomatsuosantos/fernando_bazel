@@ -34,7 +34,7 @@ codeql database create codeqldb --language=python \
 
 export CODEQL_SUITES_PATH=$HOME/codeql-home/codeql-repo/python/ql/src/codeql-suites
 export RESULTS_FOLDER=codeql-results
-mkdir -p $RESULTS_FOLDER
+sudo mkdir -p $RESULTS_FOLDER
 
 # Code Scanning suite: Queries run by default in CodeQL code scanning on GitHub.
 # Security extended suite: python-security-extended.qls
