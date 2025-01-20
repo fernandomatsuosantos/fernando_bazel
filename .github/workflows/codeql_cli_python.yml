@@ -1,4 +1,4 @@
-name: "CodeQL CLI + Bazel Build"
+name: "CodeQL CLI Python"
 
 on:
   workflow_dispatch:
@@ -23,5 +23,5 @@ jobs:
 
       - name: Install and RUN CodeQL CLI & Bazel Build
         run: |
-          sudo chmod +x codeql.sh
-          ./codeql.sh ${{ secrets.GH_KEY }}
+          sudo chmod +x codeql_cli_python.sh
+          ./codeql_cli_python.sh ${{ secrets.GH_KEY }}

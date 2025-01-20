@@ -1,7 +1,7 @@
 py_library(
     name = "calculator",
     srcs = ["calculator.py"],
-    visibility = ["//projects/python_web:__pkg__"],
+    visibility = ["//projects/python_vulnerable_app:__pkg__"],
 )
 
 py_test(
