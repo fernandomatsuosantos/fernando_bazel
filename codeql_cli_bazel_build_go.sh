@@ -10,13 +10,13 @@ BAZEL_RELEASE=v1.25.0
 #sudo apt install build-essential
 
 # Download Bazel - You may need to use sudo to run the following steps depending on your runner configuration
-wget -q --show-progress https://github.com/bazelbuild/bazelisk/releases/download/$BAZEL_RELEASE/bazelisk-linux-amd64
+wget -q https://github.com/bazelbuild/bazelisk/releases/download/$BAZEL_RELEASE/bazelisk-linux-amd64
 sudo chmod +x bazelisk-linux-amd64
 sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
 which bazel
 
 # Download CodeQL for Linux
-wget -q --show-progress https://github.com/github/codeql-action/releases/download/codeql-bundle-$CODEQL_RELEASE/codeql-bundle-linux64.tar.gz
+wget -q https://github.com/github/codeql-action/releases/download/codeql-bundle-$CODEQL_RELEASE/codeql-bundle-linux64.tar.gz
 mkdir -p $HOME_PATH/codeql-home
 tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
 
