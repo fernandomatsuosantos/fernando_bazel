@@ -19,9 +19,9 @@ tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
 # # none: The database will be created without building the source root. Available for C#, Java, JavaScript/TypeScript, Python, and Ruby.
 # # autobuild: The database will be created by attempting to automatically build the source root. Available for C/C++, C#, Go, Java/Kotlin, and Swift.
 # # manual: The database will be created by building the source root using a manually specified build command. Available for C/C++, C#, Go, Java/Kotlin, and Swift.
-$HOME_PATH/codeql-home/codeql/codeql database create codeqldb --build-mode=none --overwrite --language=$lang
+$HOME_PATH/codeql-home/codeql/codeql database create codeqldb --overwrite --build-mode=none --language=$LANG
 
-export CODEQL_SUITES_PATH=$HOME_PATH/codeql-home/codeql-repo/$lang/ql/src/codeql-suites
+export CODEQL_SUITES_PATH=$HOME_PATH/codeql-home/codeql-repo/$LANG/ql/src/codeql-suites
 mkdir -p $HOME_PATH/codeql-result
 
 # Analyze CodeQL database
@@ -31,15 +31,15 @@ mkdir -p $HOME_PATH/codeql-result
 # # Security and quality suite: python-security-and-quality.qls
 $HOME_PATH/codeql-home/codeql/codeql database analyze codeqldb \
 --format=sarif-latest \
---output=$HOME_PATH/codeql-result/$lang-code-scanning.sarif \
---sarif-category=$lang
+--output=$HOME_PATH/codeql-result/$LANG-code-scanning.sarif \
+--sarif-category=$LANG
 
 # Send SARIF to GitHub
 $HOME_PATH/codeql-home/codeql/codeql github upload-results \
 --repository=$GITHUB_REPOSITORY \
 --ref=$GITHUB_REF \
 --commit=$GITHUB_SHA \
---sarif=$HOME_PATH/codeql-result/$lang-code-scanning.sarif \
+--sarif=$HOME_PATH/codeql-result/$LANG-code-scanning.sarif \
 --github-auth-stdin=$TOKEN
 
-# cat $HOME_PATH/codeql-result/$lang-code-scanning.sarif
+# cat $HOME_PATH/codeql-result/$LANG-code-scanning.sarif
