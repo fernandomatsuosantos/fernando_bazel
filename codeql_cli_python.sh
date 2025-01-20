@@ -9,9 +9,9 @@ CODEQL_RELEASE=v2.20.1
 #sudo apt install build-essential
 
 # Download CodeQL for Linux
-wget https://github.com/github/codeql-action/releases/download/codeql-bundle-$CODEQL_RELEASE/codeql-bundle-linux64.tar.gz
+wget -q https://github.com/github/codeql-action/releases/download/codeql-bundle-$CODEQL_RELEASE/codeql-bundle-linux64.tar.gz
 mkdir -p $HOME_PATH/codeql-home
-tar xvzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
+tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
 
 # Build and create CodeQL database
 # build-mode:
