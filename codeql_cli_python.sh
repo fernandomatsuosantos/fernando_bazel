@@ -3,6 +3,7 @@
 TOKEN=$1
 HOME_PATH=./temp
 CODEQL_RELEASE=v2.20.1
+LANG=python
 
 # Certify that your runner has unzip & build-essential
 #sudo apt update
@@ -20,7 +21,7 @@ tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
 # # manual: The database will be created by building the source root using a manually specified build command. Available for C/C++, C#, Go, Java/Kotlin, and Swift.
 $HOME_PATH/codeql-home/codeql/codeql database create codeqldb --build-mode=none --overwrite --language=$lang
 
-export CODEQL_SUITES_PATH=$HOME_PATH/codeql-home/codeql-repo/python/ql/src/codeql-suites
+export CODEQL_SUITES_PATH=$HOME_PATH/codeql-home/codeql-repo/$lang/ql/src/codeql-suites
 mkdir -p $HOME_PATH/codeql-result
 
 # Analyze CodeQL database
