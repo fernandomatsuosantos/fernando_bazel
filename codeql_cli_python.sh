@@ -10,8 +10,8 @@ CODEQL_RELEASE=v2.20.1
 
 # Download CodeQL for Linux
 wget -q https://github.com/github/codeql-action/releases/download/codeql-bundle-$CODEQL_RELEASE/codeql-bundle-linux64.tar.gz
-mkdir -p $HOME_PATH_PATH/codeql-home
-tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH_PATH/codeql-home
+mkdir -p $HOME_PATH/codeql-home
+tar xzf codeql-bundle-linux64.tar.gz -C $HOME_PATH/codeql-home
 
 # Build and create CodeQL database
 # build-mode:
